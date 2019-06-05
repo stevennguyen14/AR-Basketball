@@ -31,7 +31,6 @@ public class MathManager : MonoBehaviour
 
     public int answerLocation;
 
-
     // Start is called before the first frame update
     void Start()
     {
