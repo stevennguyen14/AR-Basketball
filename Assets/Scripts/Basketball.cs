@@ -8,7 +8,6 @@ public class Basketball : MonoBehaviour
 	//public
 	public float throwSpeed;
 	public Vector3 offset;
-    public Text massText, speedText;
 
 	//private
 	private float speed;
@@ -87,7 +86,7 @@ public class Basketball : MonoBehaviour
 	void OnTouch()
 	{
 		Vector3 mousePos = Input.GetTouch(0).position;
-		mousePos.z = Camera.main.nearClipPlane * 3.5f;
+		mousePos.z = Camera.main.nearClipPlane * 5.5f;
 
 		newPosition = Camera.main.ScreenToWorldPoint(mousePos);
 
@@ -116,13 +115,4 @@ public class Basketball : MonoBehaviour
 		Invoke("Reset", 2.0f);
 	}
 
-    public void SetThrowSpeed()
-    {
-        throwSpeed = float.Parse(speedText.text);
-    }
-
-    public void SetMass()
-    {
-        rb.mass = float.Parse(massText.text);
-    }
 }
