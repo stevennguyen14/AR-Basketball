@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class MathManager : MonoBehaviour
 {
+    public GameObject correctText;
+    public GameObject wrongText;
+
     public Text equationText;
     public Text answer1Text;
     public Text answer2Text;
@@ -42,8 +45,8 @@ public class MathManager : MonoBehaviour
         miss = 0;
 
         //update UI on start
-        scoreText.text = "Score: " + score;
-        missText.text = "Miss: " + miss;
+        scoreText.text = "Score:" + score;
+        missText.text = "Wrong:" + miss;
     }
 
     public void ChooseGame()
@@ -220,27 +223,47 @@ public class MathManager : MonoBehaviour
 
         if (answer == result)
         {
-            ChooseGame();
             score++;
 
-            if (score % 5 == 0 && (rangeIndex < diffRange.Length || rangeIndex < multiDiff.Length))
+            if (score % 5 == 0 && (rangeIndex < diffRange.Length && rangeIndex < multiDiff.Length))
             {
                 rangeIndex++;
             }
-            scoreText.text = "Score: " + score;
+            scoreText.text = "Score:" + score;
+            StartCoroutine(DisplayScore(true));
         }
         else
         {
             miss++;
-            missText.text = "Miss: " + miss;
+            missText.text = "Wrong:" + miss;
+            StartCoroutine(DisplayScore(false));
         }
 
 
-        if (miss >= 5)
+        if (miss >= 3)
         {
             //end the game
-            //SceneManager.LoadScene("OtherSceneName");
+            SceneManager.LoadScene("MenuScene");
         }
 
+    }
+
+    IEnumerator DisplayScore(bool isCorrect)
+    {
+        GameObject tempObj;
+
+        if (isCorrect)
+            tempObj = correctText;
+        else
+            tempObj = wrongText;
+
+        tempObj.SetActive(true);
+
+        yield return new WaitForSeconds(1);
+
+        tempObj.SetActive(false);
+
+        if(isCorrect)
+            ChooseGame();
     }
 }

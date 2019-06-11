@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       // gameMode = 4;
+        gameMode = 4;
     }
 
     /**run this on the home menu buttons, feeding in the correct game type

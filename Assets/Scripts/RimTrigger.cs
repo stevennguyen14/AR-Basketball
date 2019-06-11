@@ -1,30 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RimTrigger : MonoBehaviour
 {
+    public GameObject mathManager;
+    public Text textScore;
 
-	public GameObject scoreText;
+    public bool hasTriggered = false;
 
-	void Start()
+    void OnTriggerEnter(Collider col)
 	{
-		scoreText.SetActive(false);
-	}
-
-	IEnumerator DisplayScore()
-	{
-		scoreText.SetActive(true);
-		yield return new WaitForSeconds(3f);
-		scoreText.SetActive(false);
-	}
-   
-	void OnTriggerEnter(Collider col)
-	{
-		if (col.gameObject.CompareTag("Ball"))
+		if (col.gameObject.CompareTag("Ball") && !hasTriggered)
 		{
 			print("Scored!!!");
-			StartCoroutine("DisplayScore");
+            hasTriggered = true;
+            mathManager.SendMessage("CheckAnswer", textScore);
+
 		}
 	}
+
+    IEnumerator Timer()
+    {
+        yield return new WaitForSeconds(2);
+        hasTriggered = false;
+    }
 }

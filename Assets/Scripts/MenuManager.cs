@@ -8,11 +8,6 @@ public class MenuManager : MonoBehaviour
 {
 
 
-    public void StartGame()
-    {
-       // SceneManager.LoadScene("OtherSceneName");
-    }
-
     public void playAdditionGame()
     {
         GameManager.instance.gameMode = 1;

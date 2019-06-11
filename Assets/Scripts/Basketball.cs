@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Basketball : MonoBehaviour
 {
 	//public
 	public float throwSpeed;
 	public Vector3 offset;
+    public Text massText, speedText;
 
 	//private
 	private float speed;
@@ -21,6 +23,7 @@ public class Basketball : MonoBehaviour
     {
 		rb = GetComponent<Rigidbody>();
 		Reset();
+        Physics.gravity = new Vector3(0, -0.5f, 0);
     }
 
     // Update is called once per frame
@@ -69,7 +72,7 @@ public class Basketball : MonoBehaviour
 	void Reset()
 	{
 		CancelInvoke();
-		transform.position = Camera.main.ViewportToWorldPoint(new Vector3(offset.x, offset.y, Camera.main.nearClipPlane * 7.5f));
+		transform.position = Camera.main.ViewportToWorldPoint(new Vector3(offset.x, offset.y, Camera.main.nearClipPlane * 3.5f));
 		newPosition = transform.position;
 		thrown = false;
 		holding = false;
@@ -84,7 +87,7 @@ public class Basketball : MonoBehaviour
 	void OnTouch()
 	{
 		Vector3 mousePos = Input.GetTouch(0).position;
-		mousePos.z = Camera.main.nearClipPlane * 7.5f;
+		mousePos.z = Camera.main.nearClipPlane * 3.5f;
 
 		newPosition = Camera.main.ScreenToWorldPoint(mousePos);
 
@@ -109,7 +112,17 @@ public class Basketball : MonoBehaviour
 		holding = false;
 		thrown = true;
 
-		//reset after 5 seconds
-		Invoke("Reset", 3.0f);
+		//reset after time
+		Invoke("Reset", 2.0f);
 	}
+
+    public void SetThrowSpeed()
+    {
+        throwSpeed = float.Parse(speedText.text);
+    }
+
+    public void SetMass()
+    {
+        rb.mass = float.Parse(massText.text);
+    }
 }
