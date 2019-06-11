@@ -21,7 +21,7 @@ public class PauseMenu : MonoBehaviour
 
     public void CloseMenu()
     {
-        pauseCanvas.SetActive(false);
         Time.timeScale = 1;
+        pauseCanvas.SetActive(false);
     }
 }

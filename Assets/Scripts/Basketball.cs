@@ -23,7 +23,7 @@ public class Basketball : MonoBehaviour
     {
 		rb = GetComponent<Rigidbody>();
 		Reset();
-        Physics.gravity = new Vector3(0, -0.5f, 0);
+        Physics.gravity = new Vector3(0, -3f, 0);
     }
 
     // Update is called once per frame
