@@ -17,7 +17,7 @@ public class RimTrigger : MonoBehaviour
 			print("Scored!!!");
             hasTriggered = true;
             mathManager.SendMessage("CheckAnswer", textScore);
-
+            StartCoroutine(Timer());
 		}
 	}
 
