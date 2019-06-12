@@ -10,6 +10,8 @@ public class MathManager : MonoBehaviour
     public GameObject correctText;
     public GameObject wrongText;
 
+    public AudioSource audio;
+
     public Text equationText;
     public Text answer1Text;
     public Text answer2Text;
@@ -224,6 +226,8 @@ public class MathManager : MonoBehaviour
         if (answer == result)
         {
             score++;
+
+            audio.Play();
 
             if (score % 5 == 0 && (rangeIndex < diffRange.Length && rangeIndex < multiDiff.Length))
             {
